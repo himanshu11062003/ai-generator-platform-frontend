@@ -18,13 +18,15 @@ const Auth: React.FC = () => {
     try {
       let response;
       if (mode === 'login') {
-        response = await fetch('https://multi-component-generator-platform-wazx.onrender.com/auth/login', {
+response = await fetch('https://ai-generator-platform-backend.onrender.com/auth/login', {
+  // rest of your fetch options
+});
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
         });
       } else if (mode === 'signup') {
-        response = await fetch('https://multi-component-generator-platform-wazx.onrender.com/auth/signup', {
+        response = await fetch('https://ai-generator-platform-backend.onrender.com/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
