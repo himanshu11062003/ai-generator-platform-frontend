@@ -18,9 +18,7 @@ const Auth: React.FC = () => {
     try {
       let response;
       if (mode === 'login') {
-response = await fetch('https://ai-generator-platform-backend.onrender.com/auth/login', {
-  // rest of your fetch options
-});
+        response = await fetch('https://ai-generator-platform-backend.onrender.com/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
