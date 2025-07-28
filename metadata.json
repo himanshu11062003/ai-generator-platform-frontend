@@ -1,0 +1,5 @@
+{
+  "name": "AI Component Generator",
+  "description": "A stateful, AI-driven micro-frontend playground to iteratively generate, preview, tweak, and export React components.",
+  "requestFramePermissions": []
+}
