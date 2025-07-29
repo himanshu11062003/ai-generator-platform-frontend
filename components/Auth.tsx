@@ -5,6 +5,7 @@ type AuthMode = 'login' | 'signup' | 'admin';
 
 const Auth: React.FC = () => {
   const [mode, setMode] = useState<AuthMode>('login');
+  const [username, setUsername] = useState(''); // ✅ Added
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secretCode, setSecretCode] = useState('');
@@ -27,7 +28,7 @@ const Auth: React.FC = () => {
         response = await fetch('https://ai-generator-platform-backend-1.onrender.com/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ username, email, password }), // ✅ Username included
         });
       } else if (mode === 'admin') {
         adminLogin(secretCode);
@@ -40,7 +41,7 @@ const Auth: React.FC = () => {
       }
 
       const data = await response.json();
-      setAuthToken(data.token, data.email);
+      setAuthToken(data.token, data.user.username); // ✅ Save username instead of email
     } catch (err: any) {
       setError(err.message || 'Unexpected error');
     }
@@ -67,6 +68,21 @@ const Auth: React.FC = () => {
 
     return (
       <>
+        {mode === 'signup' && ( // ✅ Show username field only in signup
+          <>
+            <label className="text-sm font-medium text-white mb-2" htmlFor="username">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all animate-inputFade"
+              required
+            />
+          </>
+        )}
         <label className="text-sm font-medium text-white mb-2" htmlFor="email">
           Email Address
         </label>
